@@ -246,5 +246,5 @@ if __name__ == "__main__":
                 if exc.errno != errno.EEXIST:
                     raise
         with open(file_name, 'w') as f:
-            f.write(json.dumps([{'rewards': losses[i].tolist()} for i in range(args.n_trials)]))
+            f.write(json.dumps([{'losses': losses[i].tolist()} for i in range(args.n_trials)]))
         print('Results written to ' + file_name)
