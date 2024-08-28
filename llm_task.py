@@ -10,8 +10,12 @@ import errno
 import matplotlib.pyplot as plt
 import os
 import argparse
+from decouple import config
+from huggingface_hub import login
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
+login(token=config('HF_TOKEN'))
 
 
 # def MI(answer_prob):
@@ -171,6 +175,17 @@ def get_args():
     parser.add_argument('--subject', type=str, default='abstract_algebra', help='Subject to use')
     return parser.parse_args()
 
+def run_expr(tokenizer, model, subject, seed):
+    dataset = load_dataset('cais/mmlu', 'all', split='test').filter(lambda x: x['subject'] == subject)
+    n_episodes = min(100, len(dataset))
+    # Take a random split of the dataset
+    dataset = dataset.shuffle(seed=seed)
+    partial_data = dataset[:n_episodes]
+    bandit = llm_contextual_bandit(partial_data)
+    agent = llm_selecting_agent(tokenizer, model)
+    losses = agent.run_trials(bandit, n_episodes, 1)
+    return losses.mean(), losses.std()
+    
 
 if __name__ == "__main__":
     args = get_args()
@@ -182,10 +197,10 @@ if __name__ == "__main__":
         bnb_4bit_compute_dtype=torch.bfloat16,
         bnb_4bit_quant_storage=torch.bfloat16,
     )
-    small_model_name = 'mistralai/Mistral-7B-Instruct-v0.1'
+    small_model_mistral = 'mistralai/Mistral-7B-Instruct-v0.1'
     small_model_llama = 'meta-llama/Meta-Llama-3-8B-Instruct'
     small_model_gemma = 'google/gemma-1.1-2b-it'
-    large_model_name = 'mistralai/Mixtral-8x7B-Instruct-v0.1'
+    large_model_mistral = 'mistralai/Mixtral-8x7B-Instruct-v0.1'
     large_model_llama = 'meta-llama/Meta-Llama-3-70B-Instruct'
     large_model_gemma = 'google/gemma-1.1-7b-it'
     small_model_falcon = 'tiiuae/falcon-7b-instruct'
@@ -197,7 +212,7 @@ if __name__ == "__main__":
             model_name = large_model_gemma
             model_size = 'large_gemma'
         else:
-            model_name = large_model_name
+            model_name = large_model_mistral
             model_size = 'large_mistral'
     else:
         if args.type == 'llama':
@@ -210,7 +225,7 @@ if __name__ == "__main__":
             model_name = small_model_falcon
             model_size = 'small_falcon'
         else:
-            model_name = small_model_name
+            model_name = small_model_mistral
             model_size = 'small_mistral'
     print(model_size, model_name)
 
