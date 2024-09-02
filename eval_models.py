@@ -22,8 +22,8 @@ if not os.path.exists(SAVE_PATH):
 hf_model_paths = [
     #### TODO models
     # "mistralai/Mistral-7B-Instruct-v0.1",
-    "mistralai/Mathstral-7B-v0.1",
-    "EleutherAI/llemma_7b",
+    # "mistralai/Mathstral-7B-v0.1",
+    # "EleutherAI/llemma_7b",
     "mistralai/Mistral-7B-Instruct-v0.1_quantized",
 
     "meta-llama/Llama-2-7b-chat-hf",
@@ -63,19 +63,20 @@ types = ['mistral', 'mistral', 'mistral', 'mistral',
 
 for hf_model_path in tqdm(hf_model_paths):
     print(hf_model_path, end='\t|\t')
-    tokenizer = AutoTokenizer.from_pretrained(hf_model_path, use_fast=True)
     if hf_model_path.endswith('_quantized'):
+        tokenizer = AutoTokenizer.from_pretrained(hf_model_path.split("_quantized")[0], use_fast=True)
         nf4_config = BitsAndBytesConfig(
             load_in_4bit=True,
             bnb_4bit_quant_type='nf4',
             bnb_4bit_compute_dtype=torch.bfloat16,
             bnb_4bit_quant_storage=torch.bfloat16,
         )
-        model = AutoModelForCausalLM.from_pretrained(hf_model_path, device_map='auto', quantization_config=nf4_config,
+        model = AutoModelForCausalLM.from_pretrained(hf_model_path.split("_quantized")[0], device_map='auto', quantization_config=nf4_config,
                                                      torch_dtype=torch.bfloat16, attn_implementation='flash_attention_2',
                                                      trust_remote_code=True)
     
     else:
+        tokenizer = AutoTokenizer.from_pretrained(hf_model_path, use_fast=True)
         model = AutoModelForCausalLM.from_pretrained(hf_model_path, device_map='auto',
                                                      torch_dtype=torch.bfloat16, attn_implementation='flash_attention_2',
                                                      trust_remote_code=True)
