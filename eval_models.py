@@ -47,7 +47,7 @@ hf_model_paths = [
     "google/gemma-1.1-2b-it",
     'google/gemma-1.1-7b-it',
     'google/gemma-1.1-2b-it-quantized',
-    'google/gemma-1.1-7b-it-quantized'
+    'google/gemma-1.1-7b-it-quantized',
 
     
 ]
