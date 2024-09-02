@@ -41,9 +41,13 @@ hf_model_paths = [
 
     "microsoft/Phi-3.5-mini-instruct",
     "microsoft/Phi-3.5-MoE-instruct",
+    "microsoft/Phi-3.5-mini-instruct-quantized",
+    "microsoft/Phi-3.5-MoE-instruct-quantized",
 
     "google/gemma-1.1-2b-it",
     'google/gemma-1.1-7b-it',
+    'google/gemma-1.1-2b-it-quantized',
+    'google/gemma-1.1-7b-it-quantized'
 
     
 ]
@@ -53,8 +57,8 @@ types = ['mistral', 'mistral', 'mistral', 'mistral',
             'llama', 'llama', 'llama',
             'mistral', 'llama',
             'mistral',
-            'phi3', 'phi3',
-            'gemma', 'gemma']
+            'phi3', 'phi3', 'phi3', 'phi3',
+            'gemma', 'gemma', 'gemma', 'gemma']
 
 
 for hf_model_path in tqdm(hf_model_paths):
