@@ -21,8 +21,8 @@ if not os.path.exists(SAVE_PATH):
 
 hf_model_paths = [
     #### TODO models
-    "mistralai/Mistral-7B-Instruct-v0.1",
-    "mistralai/Mathstral-7B-v0.1"
+    # "mistralai/Mistral-7B-Instruct-v0.1",
+    "mistralai/Mathstral-7B-v0.1",
     "EleutherAI/llemma_7b",
     "mistralai/Mistral-7B-Instruct-v0.1_quantized",
 
