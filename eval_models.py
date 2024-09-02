@@ -58,6 +58,7 @@ types = ['mistral', 'mistral', 'mistral', 'mistral',
 
 
 for hf_model_path in tqdm(hf_model_paths):
+    print(hf_model_path, end='\t|\t')
     tokenizer = AutoTokenizer.from_pretrained(hf_model_path, use_fast=True)
     if hf_model_path.endswith('_quantized'):
         nf4_config = BitsAndBytesConfig(
@@ -71,7 +72,8 @@ for hf_model_path in tqdm(hf_model_paths):
                                                      trust_remote_code=True)
     
     else:
-        model = AutoModelForCausalLM.from_pretrained(hf_model_path, device_map='auto', attn_implementation='flash_attention_2',
+        model = AutoModelForCausalLM.from_pretrained(hf_model_path, device_map='auto',
+                                                     torch_dtype=torch.bfloat16, attn_implementation='flash_attention_2',
                                                      trust_remote_code=True)
         
     if tokenizer.pad_token is None:
@@ -80,7 +82,7 @@ for hf_model_path in tqdm(hf_model_paths):
         tokenizer.pad_token_id = tokenizer.eos_token_id
 
     model_results = {}
-    for mmlu_subject in tqdm(mmlu_subjects, leave=False):
+    for mmlu_subject in mmlu_subjects:
         mean_loss, _ = run_expr(tokenizer, model, mmlu_subject, SEED, type=types[hf_model_paths.index(hf_model_path)])
         model_results[mmlu_subject] = mean_loss
     
