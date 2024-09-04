@@ -24,19 +24,17 @@ hf_model_paths = [
     # "mistralai/Mistral-7B-Instruct-v0.1",
     # "mistralai/Mathstral-7B-v0.1",
     # "EleutherAI/llemma_7b",
-    "mistralai/Mistral-7B-Instruct-v0.1_quantized",
+    # "mistralai/Mistral-7B-Instruct-v0.1_quantized",
 
-    "meta-llama/Llama-2-7b-chat-hf",
-    "meta-llama/Meta-Llama-3-8B-Instruct",
-    "meta-llama/Meta-Llama-3-70B-Instruct",
-
-    "meta-llama/Llama-2-7b-chat-hf_quantized",
-    "meta-llama/Meta-Llama-3-8B-Instruct_quantized",
+    # "meta-llama/Meta-Llama-3-70B-Instruct",
     "meta-llama/Meta-Llama-3-70B-Instruct_quantized",
-
-    "CorticalStack/mistral-7b-alpaca-sft",
+    "meta-llama/Llama-2-7b-chat-hf",
+    "meta-llama/Llama-2-7b-chat-hf_quantized",
     "NEU-HAI/Llama-2-7b-alpaca-cleaned",
-
+    "meta-llama/Meta-Llama-3-8B-Instruct",
+    "meta-llama/Meta-Llama-3-8B-Instruct_quantized",
+    
+    "CorticalStack/mistral-7b-alpaca-sft",
     "dicta-il/dictalm2.0",
 
     "microsoft/Phi-3.5-mini-instruct",
@@ -52,13 +50,15 @@ hf_model_paths = [
     
 ]
 
-types = ['mistral', 'mistral', 'mistral', 'mistral',
-            'llama', 'llama', 'llama',
-            'llama', 'llama', 'llama',
-            'mistral', 'llama',
-            'mistral',
-            'phi3', 'phi3', 'phi3', 'phi3',
-            'gemma', 'gemma', 'gemma', 'gemma']
+types = [
+    "mistral" if "mistral" in hf_model_path.lower() else
+    "llama" if "llama" in hf_model_path.lower() else
+    "mistral" if "dictalm" in hf_model_path.lower() else
+    "phi3" if "phi" in hf_model_path.lower() else
+    "gemma" if "gemma" in hf_model_path.lower()
+    else "unknown"
+    for hf_model_path in hf_model_paths
+]
 
 
 for hf_model_path in tqdm(hf_model_paths):
