@@ -27,27 +27,26 @@ hf_model_paths = [
     # "mistralai/Mistral-7B-Instruct-v0.1_quantized",
 
     # "meta-llama/Meta-Llama-3-70B-Instruct",
-    "meta-llama/Meta-Llama-3-70B-Instruct_quantized",
-    "meta-llama/Llama-2-7b-chat-hf",
-    "meta-llama/Llama-2-7b-chat-hf_quantized",
-    "NEU-HAI/Llama-2-7b-alpaca-cleaned",
-    "meta-llama/Meta-Llama-3-8B-Instruct",
-    "meta-llama/Meta-Llama-3-8B-Instruct_quantized",
+    # "meta-llama/Meta-Llama-3-70B-Instruct_quantized",
+    # "meta-llama/Llama-2-7b-chat-hf",
+    # "meta-llama/Llama-2-7b-chat-hf_quantized",
+    # "NEU-HAI/Llama-2-7b-alpaca-cleaned",
+    # "meta-llama/Meta-Llama-3-8B-Instruct",
+    # "meta-llama/Meta-Llama-3-8B-Instruct_quantized",
     
-    "CorticalStack/mistral-7b-alpaca-sft",
-    "dicta-il/dictalm2.0",
+    # "CorticalStack/mistral-7b-alpaca-sft",
+    # "dicta-il/dictalm2.0",
 
-    "microsoft/Phi-3.5-mini-instruct",
-    "microsoft/Phi-3.5-MoE-instruct",
-    "microsoft/Phi-3.5-mini-instruct-quantized",
-    "microsoft/Phi-3.5-MoE-instruct-quantized",
 
-    "google/gemma-1.1-2b-it",
-    'google/gemma-1.1-7b-it',
-    'google/gemma-1.1-2b-it-quantized',
-    'google/gemma-1.1-7b-it-quantized',
+    # "microsoft/Phi-3.5-mini-instruct",
+    # "microsoft/Phi-3.5-mini-instruct_quantized",
+    # "microsoft/Phi-3.5-MoE-instruct",
+    # "microsoft/Phi-3.5-MoE-instruct_quantized",
 
-    
+    # "google/gemma-1.1-2b-it",
+    # 'google/gemma-1.1-2b-it_quantized',
+    # 'google/gemma-1.1-7b-it',
+    # 'google/gemma-1.1-7b-it_quantized',   
 ]
 
 types = [
