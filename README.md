@@ -5,6 +5,7 @@
 ### MMLU Evaluation
 In the file ```eval_models.py```, Specify HuggingFace model paths in ```hf_model_paths```.
 
+
 Execute ```python ./eval_models.py```.
 Make sure you have enough GPU memory for the required models.
 
@@ -27,6 +28,8 @@ Execute ```python compare_models.py```.
 
 ### Full H-Divergence Report
 To get a comprehensive H-Divergence report with average H-Divergence and Top/Bottom-5 subjects (including values):
+
+
 In the file ```full_exp.py```,
 Specify compared models and the reference model, e.g.:
 ```
