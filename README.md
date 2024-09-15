@@ -7,6 +7,7 @@ In the file ```eval_models.py```, Specify HuggingFace model paths in ```hf_model
 
 
 Execute ```python ./eval_models.py```.
+
 Make sure you have enough GPU memory for the required models.
 
 
